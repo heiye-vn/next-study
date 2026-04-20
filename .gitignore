@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+# + 防止误用其他包管理器生成的锁文件 (pnpm-lock.yaml 必须保留并提交给 Git)
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+# + Next.js 专属构建产物
+.next/
+out/
+# + Monorepo 构建缓存 (如果未来使用 Turborepo)
+.turbo/
+
+# Environment variables
+.env
+.env.local
+# + Next.js 其他环境的本地敏感配置
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.codebuddy
+
+# Claude Code (本地权限配置，不跟踪)
+.claude/settings.local.json
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+# + pnpm 的错误日志
+pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# + 部署与云平台缓存
+.vercel/
