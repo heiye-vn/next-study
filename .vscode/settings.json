@@ -21,5 +21,10 @@
   "css.lint.unknownAtRules": "ignore",
   "eslint.workingDirectories": [
     {"mode": "auto"}
-  ]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "vue": "html",
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  }
 }
