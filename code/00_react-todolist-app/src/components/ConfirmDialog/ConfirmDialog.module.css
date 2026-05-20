@@ -1,0 +1,121 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6); /* Slate 900 semi-transparent */
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
+.dialog {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: scaleIn var(--transition-normal) forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 24px 24px 12px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.content {
+  padding: 0 24px 24px;
+}
+
+.message {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.footer {
+  padding: 16px 24px;
+  background-color: rgba(241, 245, 249, 0.4); /* Subtle bottom panel tint */
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: rgba(15, 23, 42, 0.4);
+  }
+}
+
+/* Button Styling */
+.cancelBtn, .confirmBtn {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.cancelBtn:active, .confirmBtn:active {
+  transform: scale(0.97);
+}
+
+.cancelBtn {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.cancelBtn:hover {
+  background-color: var(--bg-column);
+  color: var(--text-main);
+}
+
+.confirmBtn {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.confirmBtn:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Entry Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
