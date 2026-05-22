@@ -1,9 +1,11 @@
 // Next16.x 版本使用 proxy 代替 middleware
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, ProxyConfig } from "next/server";
 
 // 必须导出名为 proxy 的函数（或使用 export default）
 export default function proxy(request: NextRequest) {
+    const response = NextResponse.next()
+    
     // return NextResponse.redirect(new URL('/home', request.url))
 
     console.log('Path: ', request.nextUrl.pathname)
@@ -14,36 +16,50 @@ export default function proxy(request: NextRequest) {
     const sessionCookie = request.cookies.get('session')?.value
 
     // 自定义判断条件
-    if(request.nextUrl.pathname.startsWith('/api')) {
-        if(authHeader !== 'Bearer Token' || userId !== '123' || sessionCookie === 'active') {
+    if (request.nextUrl.pathname.startsWith('/api')) {
+        const isAuthValid = authHeader === 'Bearer Token';
+        const isUserIdValid = userId === '123';
+        const isSessionActive = sessionCookie === 'active'; // 注意：这里应为 true 表示已登录
+
+        if (!isAuthValid || !isUserIdValid || !isSessionActive) {
             return NextResponse.json(
                 { error: 'Unauthorized' },
                 { status: 401 }
-            )
+            );
         }
     }
 
-    return NextResponse.next()
+    // 处理跨域设置
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+        response.headers.set(key, value)
+    })
+
+    return response
+}
+
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }
 
 // 配置文件过滤器（Matcher），指定哪些路由走这个 Proxy
-export const config = {
-    // matcher: '/about/:path*'
-
-    // matcher: ['/about/:path*', '/dashboard/:path*']
-
-//     matcher: [
-//     /*
-//      * 匹配所有的路径除了以这些作为开头的：
-//      * - api (API routes)
-//      * - _next/static (static files)
-//      * - _next/image (image optimization files)
-//      * - favicon.ico (favicon file)
-//      */
-//     '/((?!api|_next/static|_next/image|favicon.ico).*)',
-//   ],
-
-    matcher: ['/api/:path*', '/dashboard/:path*']
+export const config: ProxyConfig = {
+    matcher: [
+    // 匹配所有路径，排除静态资源和 API
+    // '/((?!_next/static|_next/image|favicon.ico|api/).*)',
+    
+    // 只匹配特定前缀
+    '/dashboard/:path*',
+    '/admin/:path*',
+    
+    // 支持条件匹配
+    {
+      source: '/api/:path*',
+      has: [{ type: 'header', key: 'x-custom-header' }],
+      missing: [{ type: 'cookie', key: 'session' }],
+    },
+  ],
 }
 
 /*
