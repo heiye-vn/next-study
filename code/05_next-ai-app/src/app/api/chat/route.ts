@@ -3,7 +3,7 @@ import { convertToModelMessages, streamText } from 'ai'
 import { createDeepSeek } from "@ai-sdk/deepseek";
 
 const deepSeek = createDeepSeek({
-    apiKey: 'sk-29d4024690ea4fe499ada591b30a7949'
+    apiKey: 'sk-xxxxxxxxxxxxx'
 })
 
 export async function POST(req: NextRequest) {
