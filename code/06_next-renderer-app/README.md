@@ -73,6 +73,80 @@
 
 ---
 
+## 🔮 Next.js 16.x 渲染原理 (Rendering Fundamentals)
+
+Next.js（特别是 App Router 架构）的渲染原理是围绕 **React Server Components (RSC)** 与 **Client Components** 构建的一套高效混合渲染体系。
+
+### 1. 组件的双重身份 (RSC 与 Client Components)
+
+Next.js 将组件严格划分为两类，从根本上决定了代码的运行位置：
+
+* **React Server Components (服务端组件 / 默认)**：
+  * **运行位置**：**仅**在服务器端运行。
+  * **特点**：可以直接读取数据库、文件系统；其代码不会被打包发送到浏览器，这意味着 **0 客户端 JS 体积**，极大优化了页面加载速度。
+* **Client Components (客户端组件)**：
+  * **声明方式**：文件顶部声明 `"use client"`。
+  * **运行位置**：先在服务端进行预渲染（生成 HTML），然后浏览器下载其 JS 代码，在**客户端**激活交互。
+  * **特点**：可以使用 React 状态（`useState`）、生命周期（`useEffect`）以及浏览器的 Web API。
+
+### 2. 服务端到客户端的渲染流水线 (Sequence)
+
+当用户请求一个页面时，Next.js 服务端和客户端将经历以下渲染流程：
+
+```mermaid
+sequenceDiagram
+    participant Browser as 浏览器 (Client)
+    participant Server as Next.js 服务器 (Server)
+    participant DB as 数据库/API
+
+    Browser->>Server: 1. 请求路由 (如 /dashboard)
+    rect rgb(20, 30, 45)
+        Note over Server, DB: 服务端渲染阶段 (Server Render)
+        Server->>DB: 2. Server Components 直接抓取数据
+        DB-->>Server: 返回数据
+        Server->>Server: 3. 解析 RSC 树，生成 RSC Payload (虚拟 DOM 描述)
+        Server->>Server: 4. 将 RSC Payload 转化为静态的 HTML 字符串
+    end
+    Server-->>Browser: 5. 立即流式传输 HTML + RSC Payload
+    Note over Browser: 用户看到静态骨架 (首屏瞬间加载)
+    Browser->>Browser: 6. 异步下载 Client Components 的 JS 代码
+    Browser->>Browser: 7. 执行水合 (Hydration)，激活绑定点击等交互事件
+    Note over Browser: 页面可交互
+```
+
+#### 关键概念：RSC Payload
+RSC Payload 是 Next.js 渲染的中间媒介。它是一种高度压缩的序列化 JSON 数据，包含：
+1. Server Components 渲染出来的实际 DOM 结构和数据。
+2. Client Components 的占位符（Placeholders）以及要传递给它们的参数（Props）。
+3. 样式表和脚本的引入链接。
+
+### 3. 两种核心路由渲染模式 (Static vs. Dynamic)
+
+Next.js 会在构建阶段 (Build) 或运行时自动判断页面属于哪种模式，这是页面性能优化的精髓所在：
+
+* **静态渲染 (Static Rendering / 默认)**：
+  * **机制**：在**构建时 (Build Time)** 或者在后台重新验证数据时（如 ISR），将整个页面渲染成静态 HTML 并缓存在 CDN / 服务端。
+  * **特点**：速度极快，响应耗时几乎为 `0ms`。
+  * **转化条件**：路由内不包含动态函数（如 `cookies()`、`headers()`）且数据获取为强缓存时。
+* **动态渲染 (Dynamic Rendering)**：
+  * **机制**：在**请求时 (Request Time)**，针对每个不同的请求实时在服务端进行 RSC 渲染和生成 HTML。
+  * **转化条件**：一旦 Next.js 发现路由中使用了**动态函数**（如 `cookies()`、`headers()`、读取 `searchParams`）或者存在不缓存的 fetch 请求（`cache: 'no-store'`），整页会自动转为动态渲染。
+
+### 4. 突破性的流式渲染与悬挂 (Streaming & Suspense)
+
+在传统的 SSR 中，服务端必须等页面上**所有数据都加载完成**后，才能将 HTML 统一响应给浏览器，这会导致慢接口阻塞整页加载。
+
+Next.js 16 深度支持 **Streaming (流式传输)**：
+1. 你可以使用 `<Suspense>` 包裹慢速组件（例如一个复杂的订单列表组件）。
+2. 服务端会**率先**将页面其余静态部分的 HTML 以及 `<Suspense>` 的 loading 骨架屏 HTML 发送给浏览器。
+3. 慢速组件的数据在服务端加载完成后，服务端在**同一个 TCP 连接**中继续向浏览器推送该组件的真实 HTML 块。
+4. 浏览器接收到后，会自动在原位置将 loading 骨架替换为真实的组件 DOM，整个过程无需页面重新刷新。
+
+> [!NOTE]
+> 这种“渐进式水合”和“流式数据填充”是 React 19 和 Next.js 16 能够承载超大型动态 Web 应用同时保持极佳首屏体验的核心秘密。
+
+---
+
 ## 🚀 本地运行与调试
 
 1. **安装依赖**：
