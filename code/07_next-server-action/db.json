@@ -1,0 +1,18 @@
+[
+  {
+    "name": "张三",
+    "email": "zhangsan@example.com",
+    "message": "大家好！！！",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "id": "nhvtd94",
+    "createdAt": "2026-06-08T07:40:36.665Z"
+  },
+  {
+    "name": "王麻子",
+    "email": "shunpingzi7@gmail.com",
+    "message": "/admin",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "id": "fj5hhp1",
+    "createdAt": "2026-06-08T07:41:43.029Z"
+  }
+]
