@@ -53,6 +53,19 @@ export default function Home() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18" />
         </svg>
       )
+    },
+    {
+      title: "组件与函数缓存",
+      tag: "React & Next Caching",
+      desc: "包含单请求去重记忆（React cache）与跨请求持久化缓存（use cache 指令）。",
+      code: "cache(fn) / \"use cache\"",
+      href: "/demo-component-cache",
+      colorClass: "from-pink-500 to-rose-400",
+      icon: (
+        <svg className="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      )
     }
   ];
 
@@ -64,12 +77,12 @@ export default function Home() {
           Next.js 16.x <span className="text-gradient">数据获取与缓存中控台</span>
         </h1>
         <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-          在 React Server Components (RSC) 体系下，Next.js 对原生的 <code>fetch</code> API 进行了极具深度的工程化扩展，并提供了基于服务端的 <strong>Data Cache</strong>（数据缓存）。本演示平台采用高保真模拟网络请求，帮助您快速掌握 4 大核心数据获取与缓存机制。
+          在 React Server Components (RSC) 体系下，Next.js 对原生的 <code>fetch</code> API 进行了极具深度的工程化扩展，并提供了基于服务端的 <strong>Data Cache</strong>（数据缓存）。本演示平台采用高保真模拟网络请求，帮助您快速掌握 5 大核心数据获取与缓存机制。
         </p>
       </div>
 
-      {/* 4 大核心演示卡片区 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 5 大核心演示卡片区 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {demos.map((demo, idx) => (
           <div key={idx} className="glass-panel rounded-2xl p-6 flex flex-col justify-between group">
             <div>
@@ -112,18 +125,18 @@ export default function Home() {
           <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
-          Next.js 16 缓存机制技术矩阵对比
+          Next.js 16 缓存与记忆机制技术矩阵对比
         </h2>
         <div className="glass-panel rounded-2xl overflow-hidden border border-white/5">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
               <thead>
                 <tr className="bg-white/5 border-b border-white/10 text-zinc-300 font-semibold">
-                  <th className="p-4">演示场景</th>
-                  <th className="p-4">缓存配置选项</th>
-                  <th className="p-4">数据过期/驱逐时机</th>
+                  <th className="p-4">缓存机制</th>
+                  <th className="p-4">缓存配置选项 / 指令</th>
+                  <th className="p-4">缓存驱逐与过期时机</th>
                   <th className="p-4">首次抓取延迟</th>
-                  <th className="p-4">推荐业务场景</th>
+                  <th className="p-4">推荐使用场景</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5 text-zinc-400">
@@ -135,18 +148,18 @@ export default function Home() {
                   <td className="p-4">账户余额、实时通知、股市行情</td>
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
-                  <td className="p-4 font-semibold text-zinc-200">强静态缓存</td>
+                  <td className="p-4 font-semibold text-zinc-200">强静态缓存 (Data Cache)</td>
                   <td className="p-4"><code className="bg-black/30 p-1 rounded font-mono text-cyan-400 text-xs">cache: 'force-cache'</code></td>
-                  <td className="p-4">永久存活，直到手动清空或构建部署</td>
+                  <td className="p-4">永久存活，直到手动清除或重部署</td>
                   <td className="p-4">近乎 0ms (首次除外)</td>
-                  <td className="p-4">商品详情页、用户帮助中心、服务条款</td>
+                  <td className="p-4">商品详情页、系统服务条款、帮助中心</td>
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-4 font-semibold text-zinc-200">基于时间的重新验证</td>
                   <td className="p-4"><code className="bg-black/30 p-1 rounded font-mono text-purple-400 text-xs">next: &#123; revalidate: 10 &#125;</code></td>
-                  <td className="p-4">超过设定的过期时长后（SWR 机制）</td>
-                  <td className="p-4">0ms (过期后首次返回旧值, 后台更新)</td>
-                  <td className="p-4">热门商品排行、博客文章列表、天气</td>
+                  <td className="p-4">过期后首次访问返回旧值，后台静默重刷 (SWR)</td>
+                  <td className="p-4">0ms (过期后首次除外)</td>
+                  <td className="p-4">热门商品排行、博客文章列表、天气情况</td>
                 </tr>
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-4 font-semibold text-zinc-200">按需手动重新验证</td>

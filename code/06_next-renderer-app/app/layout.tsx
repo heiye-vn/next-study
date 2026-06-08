@@ -71,6 +71,12 @@ export default function RootLayout({
                 时间验证
               </Link>
               <Link
+                href="/demo-component-cache"
+                className="text-zinc-400 transition-colors hover:text-cyan-400"
+              >
+                组件缓存
+              </Link>
+              <Link
                 href="/demo-on-demand"
                 className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 font-medium text-cyan-400 transition-all hover:border-cyan-500/40 hover:bg-cyan-500/20"
               >
