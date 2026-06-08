@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #080b11;
@@ -21,7 +21,7 @@
 /* 全局基类 */
 body {
   background-color: var(--background);
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
     radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
     radial-gradient(at 50% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
@@ -82,17 +82,21 @@ body {
 /* 渐变文本 */
 .text-gradient {
   background: linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #a78bfa 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* 用于模拟动态加载条的动画 */
 @keyframes loading-progress {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 .animate-loading {
   animation: loading-progress 0.3s ease-out forwards;
 }
-
