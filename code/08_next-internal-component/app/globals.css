@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fcfcfd;
+  --foreground: #09090b;
+  --grid-color: rgba(9, 9, 11, 0.03);
+  --grid-highlight: rgba(99, 102, 241, 0.05);
+  --border-lab: rgba(9, 9, 11, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-title: var(--font-outfit), sans-serif;
+  
+  --animate-scanline: scan 10s linear infinite;
+  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.92); }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030712;
+    --foreground: #f9fafb;
+    --grid-color: rgba(249, 250, 251, 0.02);
+    --grid-highlight: rgba(168, 85, 247, 0.04);
+    --border-lab: rgba(249, 250, 251, 0.08);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* 精密实验室背景网格 */
+.bg-grid {
+  background-size: 40px 40px, 8px 8px;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-highlight) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-highlight) 1px, transparent 1px);
+}
+
+/* 扫描线效果 */
+.scanline-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+@media (prefers-color-scheme: dark) {
+  .scanline-overlay::after {
+    opacity: 0.25;
+  }
+}
+
+/* 工业定位角标容器 */
+.lab-panel {
+  position: relative;
+  border: 1px solid var(--border-lab);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .lab-panel {
+    background: rgba(10, 10, 15, 0.7);
+  }
+}
+
+/* 实验室角落装饰 */
+.lab-corners::before,
+.lab-corners::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: currentColor;
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.lab-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.lab-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* 点阵纹理 */
+.dot-matrix {
+  background-image: radial-gradient(var(--border-lab) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* 微小发光点 */
+.led-glow-green {
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+.led-glow-amber {
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+.led-glow-purple {
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+}
+.led-glow-cyan {
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+}
+
