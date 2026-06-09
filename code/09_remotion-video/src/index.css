@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap');
+
+:root {
+  --bg-dark: #030712;
+  --bg-card: rgba(17, 24, 39, 0.75);
+  --color-primary: #8b5cf6;     /* 紫色 */
+  --color-secondary: #06b6d4;   /* 青色 */
+  --color-success: #10b981;     /* 绿色 */
+  --color-warning: #f59e0b;     /* 黄色 */
+  --color-text-main: #f9fafb;
+  --color-text-muted: #9ca3af;
+  --font-title: 'Outfit', 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 视频画布容器 */
+.video-canvas {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-sans);
+}
+
+/* 霓虹网格背景 */
+.grid-bg {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(500px) rotateX(60deg);
+  opacity: 0.8;
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);
+}
+
+/* 动态光晕 */
+.glowing-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+.orb-primary {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+}
+
+.orb-secondary {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+}
+
+/* 渐变文本 */
+.gradient-text {
+  font-family: var(--font-title);
+  background: linear-gradient(135deg, #ffffff 10%, #a78bfa 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  font-family: var(--font-title);
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple {
+  font-family: var(--font-title);
+  background: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 玻璃拟态卡片 */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent);
+}
+
+/* 标题样式 */
+.scene-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 64px;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.scene-subtitle {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-weight: 400;
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+/* SVG 流光线条 */
+.svg-flow-path {
+  stroke-dasharray: 12;
+  animation: svgFlow 1s linear infinite;
+}
+
+@keyframes svgFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
