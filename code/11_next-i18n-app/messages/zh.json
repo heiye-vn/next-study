@@ -1,0 +1,191 @@
+{
+  "site": {
+    "title": "i18n 学习项目",
+    "description": "一个用于学习 Next.js 国际化的示范项目"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "blog": "博客",
+    "about": "关于"
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "viewDetails": "查看详情",
+    "backToList": "返回列表",
+    "readMore": "阅读全文",
+    "loading": "加载中...",
+    "search": "搜索"
+  },
+  "home": {
+    "hero": {
+      "title": "掌握 Next.js 国际化",
+      "subtitle": "从入门到精通，系统学习 i18n 最佳实践",
+      "description": "本项目演示了如何在 Next.js App Router 中实现完整的多语言支持，涵盖路由、翻译、格式化和 SEO 等核心概念。",
+      "cta": "开始探索"
+    },
+    "features": {
+      "title": "核心功能演示",
+      "subtitle": "每个页面都展示了不同的国际化技术",
+      "routing": {
+        "title": "智能路由",
+        "description": "基于 URL 前缀的多语言路由，自动语言检测和偏好记忆"
+      },
+      "translation": {
+        "title": "灵活翻译",
+        "description": "支持 ICU 消息语法、变量插值、复数规则和富文本翻译"
+      },
+      "formatting": {
+        "title": "本地化格式",
+        "description": "日期、时间、数字和货币的自动本地化显示"
+      },
+      "seo": {
+        "title": "多语言 SEO",
+        "description": "自动生成交替语言链接、元数据翻译和 Open Graph 标签"
+      }
+    },
+    "stats": {
+      "languages": "支持语言",
+      "pages": "演示页面",
+      "components": "UI 组件"
+    },
+    "icu_demo": {
+      "title": "ICU 消息语法演示",
+      "greeting": "你好，{name}！欢迎来到我们的网站。",
+      "items": "你有 {count, plural, =0 {没有消息} =1 {一条消息} other {# 条消息}}。",
+      "lastUpdated": "最后更新于 {date}"
+    }
+  },
+  "products": {
+    "title": "产品展示",
+    "subtitle": "探索我们的本地化产品展示",
+    "list": [
+      {
+        "id": "quantum-laptop",
+        "name": "Quantum 超极本 Pro",
+        "description": "搭载最新处理器的旗舰级笔记本电脑",
+        "price": 8999,
+        "currency": "CNY"
+      },
+      {
+        "id": "nebula-phone",
+        "name": "Nebula 智能手机 X",
+        "description": "配备 AI 摄影系统的新一代旗舰手机",
+        "price": 4999,
+        "currency": "CNY"
+      },
+      {
+        "id": "aurora-headphones",
+        "name": "Aurora 降噪耳机",
+        "description": "沉浸式音频体验，支持空间音频",
+        "price": 1299,
+        "currency": "CNY"
+      },
+      {
+        "id": "stellar-watch",
+        "name": "Stellar 智能手表",
+        "description": "全天候健康监测与智能通知",
+        "price": 2499,
+        "currency": "CNY"
+      }
+    ],
+    "detail": {
+      "specs": "产品规格",
+      "features": "产品特性",
+      "addToCart": "加入购物车",
+      "reviews": "用户评价",
+      "reviewCount": "{count} 条评价",
+      "inStock": "有货",
+      "outOfStock": "缺货",
+      "rating": "评分 {rating} / 5.0"
+    }
+  },
+  "blog": {
+    "title": "技术博客",
+    "subtitle": "探索国际化的最佳实践与技巧",
+    "articles": [
+      {
+        "slug": "getting-started-next-intl",
+        "title": "Next-intl 快速入门指南",
+        "excerpt": "从零开始搭建一个完整的 Next.js 国际化项目，包括安装配置、翻译文件组织和路由设置。",
+        "author": "张三",
+        "date": "2026-06-01",
+        "readTime": 8,
+        "category": "教程"
+      },
+      {
+        "slug": "icu-message-syntax",
+        "title": "ICU 消息语法完全指南",
+        "excerpt": "深入了解 ICU 消息语法的各种特性，包括变量插值、复数规则、性别选择和日期格式化。",
+        "author": "李四",
+        "date": "2026-05-15",
+        "readTime": 12,
+        "category": "进阶"
+      },
+      {
+        "slug": "seo-multilingual",
+        "title": "多语言网站的 SEO 优化策略",
+        "excerpt": "学习如何为多语言网站配置 hreflang 标签、sitemap 和结构化数据，提升搜索引擎排名。",
+        "author": "王五",
+        "date": "2026-05-01",
+        "readTime": 10,
+        "category": "SEO"
+      }
+    ],
+    "readTime": "{minutes} 分钟阅读",
+    "publishedOn": "发布于 {date}",
+    "by": "作者：{author}",
+    "category": "分类：{category}"
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "了解这个项目的背后故事",
+    "mission": {
+      "title": "我们的使命",
+      "description": "帮助开发者掌握 Next.js 国际化的核心技能，构建面向全球用户的优质应用。"
+    },
+    "team": {
+      "title": "团队成员",
+      "members": [
+        {
+          "name": "陈明远",
+          "role": "首席架构师",
+          "bio": "10 年前端开发经验，专注于国际化架构设计"
+        },
+        {
+          "name": "林小雨",
+          "role": "UI/UX 设计师",
+          "bio": "擅长多语言界面设计与用户体验优化"
+        },
+        {
+          "name": "赵文博",
+          "role": "全栈工程师",
+          "bio": "Next.js 核心贡献者，热衷于开源技术分享"
+        }
+      ]
+    },
+    "stats": {
+      "title": "项目数据",
+      "contributors": "贡献者",
+      "commits": "代码提交",
+      "stars": "GitHub Stars"
+    },
+    "contact": {
+      "title": "联系我们",
+      "email": "邮箱",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} i18n 学习项目。保留所有权利。",
+    "builtWith": "使用 Next.js + next-intl 构建"
+  },
+  "breadcrumb": {
+    "home": "首页"
+  },
+  "theme": {
+    "light": "亮色模式",
+    "dark": "暗色模式"
+  }
+}

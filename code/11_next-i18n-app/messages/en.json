@@ -1,0 +1,191 @@
+{
+  "site": {
+    "title": "i18n Learning Project",
+    "description": "A demo project for learning Next.js internationalization"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "blog": "Blog",
+    "about": "About"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewDetails": "View Details",
+    "backToList": "Back to List",
+    "readMore": "Read More",
+    "loading": "Loading...",
+    "search": "Search"
+  },
+  "home": {
+    "hero": {
+      "title": "Master Next.js Internationalization",
+      "subtitle": "From beginner to expert, learn i18n best practices",
+      "description": "This project demonstrates how to implement complete multilingual support in Next.js App Router, covering routing, translation, formatting, and SEO.",
+      "cta": "Start Exploring"
+    },
+    "features": {
+      "title": "Core Feature Demos",
+      "subtitle": "Each page showcases different internationalization techniques",
+      "routing": {
+        "title": "Smart Routing",
+        "description": "URL prefix-based multilingual routing with automatic language detection and preference memory"
+      },
+      "translation": {
+        "title": "Flexible Translation",
+        "description": "Support for ICU message syntax, variable interpolation, plural rules, and rich text translation"
+      },
+      "formatting": {
+        "title": "Localized Formatting",
+        "description": "Automatic localization for dates, times, numbers, and currency display"
+      },
+      "seo": {
+        "title": "Multilingual SEO",
+        "description": "Auto-generated alternate language links, metadata translation, and Open Graph tags"
+      }
+    },
+    "stats": {
+      "languages": "Languages",
+      "pages": "Demo Pages",
+      "components": "UI Components"
+    },
+    "icu_demo": {
+      "title": "ICU Message Syntax Demo",
+      "greeting": "Hello, {name}! Welcome to our website.",
+      "items": "You have {count, plural, =0 {no messages} =1 {one message} other {# messages}}.",
+      "lastUpdated": "Last updated on {date}"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Explore our localized product showcase",
+    "list": [
+      {
+        "id": "quantum-laptop",
+        "name": "Quantum Ultrabook Pro",
+        "description": "Flagship laptop with the latest processor",
+        "price": 1299,
+        "currency": "USD"
+      },
+      {
+        "id": "nebula-phone",
+        "name": "Nebula Smartphone X",
+        "description": "Next-gen flagship phone with AI camera system",
+        "price": 899,
+        "currency": "USD"
+      },
+      {
+        "id": "aurora-headphones",
+        "name": "Aurora Noise-Cancelling Headphones",
+        "description": "Immersive audio experience with spatial audio support",
+        "price": 199,
+        "currency": "USD"
+      },
+      {
+        "id": "stellar-watch",
+        "name": "Stellar Smartwatch",
+        "description": "24/7 health monitoring with smart notifications",
+        "price": 349,
+        "currency": "USD"
+      }
+    ],
+    "detail": {
+      "specs": "Specifications",
+      "features": "Features",
+      "addToCart": "Add to Cart",
+      "reviews": "Reviews",
+      "reviewCount": "{count} reviews",
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock",
+      "rating": "Rating {rating} / 5.0"
+    }
+  },
+  "blog": {
+    "title": "Tech Blog",
+    "subtitle": "Explore i18n best practices and tips",
+    "articles": [
+      {
+        "slug": "getting-started-next-intl",
+        "title": "Getting Started with Next-intl",
+        "excerpt": "Build a complete Next.js i18n project from scratch, including setup, translation file organization, and routing configuration.",
+        "author": "John Smith",
+        "date": "2026-06-01",
+        "readTime": 8,
+        "category": "Tutorial"
+      },
+      {
+        "slug": "icu-message-syntax",
+        "title": "Complete Guide to ICU Message Syntax",
+        "excerpt": "Deep dive into ICU message syntax features including variable interpolation, plural rules, gender selection, and date formatting.",
+        "author": "Jane Doe",
+        "date": "2026-05-15",
+        "readTime": 12,
+        "category": "Advanced"
+      },
+      {
+        "slug": "seo-multilingual",
+        "title": "SEO Strategies for Multilingual Websites",
+        "excerpt": "Learn how to configure hreflang tags, sitemaps, and structured data for multilingual websites to boost search engine rankings.",
+        "author": "Bob Wilson",
+        "date": "2026-05-01",
+        "readTime": 10,
+        "category": "SEO"
+      }
+    ],
+    "readTime": "{minutes} min read",
+    "publishedOn": "Published on {date}",
+    "by": "By {author}",
+    "category": "Category: {category}"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn the story behind this project",
+    "mission": {
+      "title": "Our Mission",
+      "description": "Help developers master Next.js i18n skills and build quality applications for global users."
+    },
+    "team": {
+      "title": "Team Members",
+      "members": [
+        {
+          "name": "Michael Chen",
+          "role": "Chief Architect",
+          "bio": "10 years of frontend experience, focused on i18n architecture design"
+        },
+        {
+          "name": "Sarah Lin",
+          "role": "UI/UX Designer",
+          "bio": "Expert in multilingual interface design and UX optimization"
+        },
+        {
+          "name": "David Zhao",
+          "role": "Full-Stack Engineer",
+          "bio": "Next.js core contributor, passionate about open-source sharing"
+        }
+      ]
+    },
+    "stats": {
+      "title": "Project Stats",
+      "contributors": "Contributors",
+      "commits": "Commits",
+      "stars": "GitHub Stars"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "Email",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} i18n Learning Project. All rights reserved.",
+    "builtWith": "Built with Next.js + next-intl"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  }
+}

@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #faf9f7;
+  --bg-card: #ffffff;
+  --bg-elevated: #f5f3f0;
+  --bg-nav: rgba(255, 255, 255, 0.72);
+  --text-primary: #1a1a2e;
+  --text-secondary: #5a5a72;
+  --text-muted: #9898a8;
+  --accent: #e94560;
+  --accent-hover: #d13a54;
+  --accent-subtle: #fef2f4;
+  --border: #e8e4e0;
+  --border-subtle: #f0ece8;
+}
+
+.dark {
+  --bg: #0c0c16;
+  --bg-card: #16162a;
+  --bg-elevated: #1e1e34;
+  --bg-nav: rgba(12, 12, 22, 0.78);
+  --text-primary: #e8e4e0;
+  --text-secondary: #9898a8;
+  --text-muted: #5a5a72;
+  --accent: #ff6b81;
+  --accent-hover: #e94560;
+  --accent-subtle: #2a1a20;
+  --border: #2a2a44;
+  --border-subtle: #1e1e38;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-nav: var(--bg-nav);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: "Noto Sans SC", "Noto Sans JP", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Smooth transitions for theme switching */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Override transitions for animations */
+.no-transition {
+  transition: none !important;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.4s; }

@@ -1,0 +1,191 @@
+{
+  "site": {
+    "title": "i18n 学習プロジェクト",
+    "description": "Next.js の国際化を学ぶためのデモプロジェクト"
+  },
+  "nav": {
+    "home": "ホーム",
+    "products": "製品",
+    "blog": "ブログ",
+    "about": "概要"
+  },
+  "common": {
+    "learnMore": "詳しく見る",
+    "viewDetails": "詳細を見る",
+    "backToList": "一覧に戻る",
+    "readMore": "続きを読む",
+    "loading": "読み込み中...",
+    "search": "検索"
+  },
+  "home": {
+    "hero": {
+      "title": "Next.js 国際化をマスターする",
+      "subtitle": "初心者から上級者まで、i18n のベストプラクティスを学ぶ",
+      "description": "このプロジェクトでは、Next.js App Router で完全な多言語サポートを実装する方法を、ルーティング、翻訳、フォーマット、SEO などの核心概念を含めて実演します。",
+      "cta": "探索を始める"
+    },
+    "features": {
+      "title": "コア機能デモ",
+      "subtitle": "各ページで異なる国際化技術を紹介",
+      "routing": {
+        "title": "スマートルーティング",
+        "description": "URL プレフィックスベースの多言語ルーティング、自動言語検出、設定の記憶"
+      },
+      "translation": {
+        "title": "柔軟な翻訳",
+        "description": "ICU メッセージ構文、変数補間、複数形ルール、リッチテキスト翻訳のサポート"
+      },
+      "formatting": {
+        "title": "ローカライズされたフォーマット",
+        "description": "日付、時刻、数値、通貨の自動ローカライズ表示"
+      },
+      "seo": {
+        "title": "多言語 SEO",
+        "description": "代替言語リンク、メタデータ翻訳、Open Graph タグの自動生成"
+      }
+    },
+    "stats": {
+      "languages": "対応言語",
+      "pages": "デモページ",
+      "components": "UI コンポーネント"
+    },
+    "icu_demo": {
+      "title": "ICU メッセージ構文デモ",
+      "greeting": "こんにちは、{name} さん！ウェブサイトへようこそ。",
+      "items": "{count, plural, =0 {メッセージはありません} =1 {1 件のメッセージ} other {# 件のメッセージ}}があります。",
+      "lastUpdated": "最終更新日：{date}"
+    }
+  },
+  "products": {
+    "title": "製品紹介",
+    "subtitle": "ローカライズされた製品展示をご覧ください",
+    "list": [
+      {
+        "id": "quantum-laptop",
+        "name": "Quantum ウルトラブック Pro",
+        "description": "最新プロセッサ搭載のフラッグシップノートパソコン",
+        "price": 189000,
+        "currency": "JPY"
+      },
+      {
+        "id": "nebula-phone",
+        "name": "Nebula スマートフォン X",
+        "description": "AI カメラシステム搭載の次世代フラッグシップスマホ",
+        "price": 129800,
+        "currency": "JPY"
+      },
+      {
+        "id": "aurora-headphones",
+        "name": "Aurora ノイズキャンセリングヘッドホン",
+        "description": "空間オーディオ対応の没入型オーディオ体験",
+        "price": 27800,
+        "currency": "JPY"
+      },
+      {
+        "id": "stellar-watch",
+        "name": "Stellar スマートウォッチ",
+        "description": "24 時間健康モニタリングとスマート通知",
+        "price": 49800,
+        "currency": "JPY"
+      }
+    ],
+    "detail": {
+      "specs": "製品仕様",
+      "features": "製品特長",
+      "addToCart": "カートに入れる",
+      "reviews": "レビュー",
+      "reviewCount": "{count} 件のレビュー",
+      "inStock": "在庫あり",
+      "outOfStock": "在庫切れ",
+      "rating": "評価 {rating} / 5.0"
+    }
+  },
+  "blog": {
+    "title": "技術ブログ",
+    "subtitle": "国際化のベストプラクティスとヒントを探る",
+    "articles": [
+      {
+        "slug": "getting-started-next-intl",
+        "title": "Next-intl クイックスタートガイド",
+        "excerpt": "インストール設定、翻訳ファイルの構成、ルーティング設定を含む、完全な Next.js 国際化プロジェクトをゼロから構築します。",
+        "author": "田中太郎",
+        "date": "2026-06-01",
+        "readTime": 8,
+        "category": "チュートリアル"
+      },
+      {
+        "slug": "icu-message-syntax",
+        "title": "ICU メッセージ構文 完全ガイド",
+        "excerpt": "変数補間、複数形ルール、性別選択、日付フォーマットを含む、ICU メッセージ構文のさまざまな機能を深く掘り下げます。",
+        "author": "佐藤花子",
+        "date": "2026-05-15",
+        "readTime": 12,
+        "category": "上級"
+      },
+      {
+        "slug": "seo-multilingual",
+        "title": "多言語ウェブサイトの SEO 戦略",
+        "excerpt": "多言語ウェブサイトの hreflang タグ、サイトマップ、構造化データの設定方法を学び、検索エンジンランキングを向上させます。",
+        "author": "鈴木健太",
+        "date": "2026-05-01",
+        "readTime": 10,
+        "category": "SEO"
+      }
+    ],
+    "readTime": "{minutes} 分で読了",
+    "publishedOn": "公開日：{date}",
+    "by": "著者：{author}",
+    "category": "カテゴリ：{category}"
+  },
+  "about": {
+    "title": "私たちについて",
+    "subtitle": "このプロジェクトの背景を知る",
+    "mission": {
+      "title": "私たちの使命",
+      "description": "開発者が Next.js 国際化のコアスキルを習得し、グローバルユーザー向けの質の高いアプリケーションを構築するのを支援します。"
+    },
+    "team": {
+      "title": "チームメンバー",
+      "members": [
+        {
+          "name": "山田太郎",
+          "role": "チーフアーキテクト",
+          "bio": "10 年のフロントエンド開発経験、国際化アーキテクチャ設計に注力"
+        },
+        {
+          "name": "鈴木美咲",
+          "role": "UI/UX デザイナー",
+          "bio": "多言語インターフェースデザインとユーザー体験最適化の専門家"
+        },
+        {
+          "name": "高橋翔太",
+          "role": "フルスタックエンジニア",
+          "bio": "Next.js コアコントリビューター、オープンソース技術共有に情熱"
+        }
+      ]
+    },
+    "stats": {
+      "title": "プロジェクト統計",
+      "contributors": "コントリビューター",
+      "commits": "コミット数",
+      "stars": "GitHub スター"
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "email": "メール",
+      "github": "GitHub",
+      "twitter": "Twitter"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} i18n 学習プロジェクト。全著作権所有。",
+    "builtWith": "Next.js + next-intl で構築"
+  },
+  "breadcrumb": {
+    "home": "ホーム"
+  },
+  "theme": {
+    "light": "ライトモード",
+    "dark": "ダークモード"
+  }
+}
