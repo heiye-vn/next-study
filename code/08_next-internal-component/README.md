@@ -187,3 +187,33 @@ Next.js 的字体加载机制在构建时自动下载字体文件并托管在本
     ├── next.svg            # 默认矢量 Logo
     └── vercel.svg          # 默认矢量 Logo
 ```
+
+---
+
+## ⚙️ 企业级编译与构建配置 (`next.config.ts`)
+
+本项目配置了一份标准的 Next.js 企业级生产配置说明，兼顾了开发环境调试效率与生产环境的性能与安全性。
+
+### 📄 核心配置项及属性说明
+
+| 配置字段              | 属性 / 类型                      | 核心作用与企业级最佳实践说明                                                                             |
+| :-------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| **`output`**          | `'export' \| 'standalone'`       | 控制打包输出模式。`standalone` 用于 Docker 独立服务部署（最推荐）；`export` 用于静态站点导出。           |
+| **`assetPrefix`**     | `string`                         | 静态资源 CDN 前缀，生产环境下用于将静态资源路径指向第三方 CDN 域名以加速访问。                           |
+| **`basePath`**        | `string`                         | 子路径部署前缀，允许将应用挂载在域名的子目录下（例如部署在 `/my-app`）。                                 |
+| **`images`**          | `remotePatterns` / `unoptimized` | 图片优化白名单与开关。在静态导出时需要将 `unoptimized` 设为 `true`。                                     |
+| **`headers`**         | `async headers()`                | 自定义 HTTP 响应头。配置 CSP 安全策略、HSTS 强制 HTTPS、防 XSS 以及防 Clickjacking 安全头。              |
+| **`env`**             | `Record<string, string>`         | 构建期和运行期环境变量注入，在组件中可以通过 `process.env.XXX` 安全读取。                                |
+| **`typescript`**      | `{ ignoreBuildErrors: false }`   | 强类型安全控制。企业级生产环境必须设为 `false`，确保任何 TS 编译错误都会中止打包。                       |
+| **`reactStrictMode`** | `boolean`                        | React 严格模式开关，能提前捕获不规范的副作用或生命周期内存泄漏 Bug。                                     |
+| **`typedRoutes`**     | `boolean`                        | 启用类型安全路由（Next.js v16 一级属性），让 `<Link>` 组件的 `href` 路径绑定 TS 类型检查，防止输错拼写。 |
+| **`compress`**        | `boolean`                        | 启用 Gzip/Brotli 压缩。如果前置代理（如 Nginx）已配置压缩，可关闭以减轻 Node.js CPU 负载。               |
+| **`generateEtags`**   | `boolean`                        | 自动生成协商缓存 Etag 响应头，避免浏览器重复下载未修改的页面。                                           |
+| **`pageExtensions`**  | `string[]`                       | 允许匹配的页面文件扩展名（限制路由文件类型）。                                                           |
+| **`devIndicators`**   | `{ position }`                   | 开发环境下的闪电指示器位置控制（默认右下角）。                                                           |
+| **`logging`**         | `{ fetches: { fullUrl } }`       | 开发调试日志配置。开启后在控制台打印所有 fetch 请求的完整 URL，极大提升接口联调体验。                    |
+| **`turbopack`**       | `turbopack: {}`                  | 针对 Next.js v16 默认的 Turbopack 编译器的优化配置（支持别名配置等）。                                   |
+
+> [!IMPORTANT]
+> **静态导出（Static Export）与动态特性冲突：**
+> 在启用静态导出 `output: 'export'` 时，Next.js 会禁用所有服务器端的动态路由和响应逻辑。因此，自定义 `headers()`、`i18n` 等服务器端功能将失效。本项目中已采用通过环境变量动态过滤和切换的健壮架构设计。
