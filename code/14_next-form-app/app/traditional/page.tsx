@@ -317,9 +317,9 @@ export default function TraditionalFormPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
-            <h3 className="mb-2 text-sm font-semibold text-amber-700">注意事项</h3>
-            <p className="text-sm leading-relaxed text-amber-700/80">
+          <div className="rounded-xl border border-amber-500/20 dark:border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10 p-5">
+            <h3 className="mb-2 text-sm font-semibold text-amber-700 dark:text-amber-400">注意事项</h3>
+            <p className="text-sm leading-relaxed text-amber-700/80 dark:text-amber-400/80">
               每个字段都需要单独的 state 和 handler，随着字段增加，代码会变得冗长且难以维护。
               同时每次输入都会触发组件重渲染。
             </p>

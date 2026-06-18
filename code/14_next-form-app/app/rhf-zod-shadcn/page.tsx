@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { ArrowLeft, CheckCircle2, Loader2, Code2, Sparkles, Layers } from 'lucide-react';
 import { submitForm, type FormState } from '../actions/submit';
+import { contactFormSchema, type ContactFormData } from '@/lib/schemas';
 import {
   Form,
   FormControl,
@@ -27,15 +27,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const formSchema = z.object({
-  name: z.string().min(1, '请输入姓名').min(2, '姓名至少需要 2 个字符'),
-  email: z.string().min(1, '请输入邮箱').email('请输入有效的邮箱地址'),
-  subject: z.string().min(1, '请选择主题'),
-  message: z.string().min(1, '请输入留言内容').min(10, '留言至少需要 10 个字符'),
-});
-
-type ContactFormData = z.infer<typeof formSchema>;
-
 const initialState: FormState = {
   success: false,
   message: '',
@@ -45,7 +36,7 @@ export default function RhfZodShadcnPage() {
   const [state, formAction, isPending] = useActionState(submitForm, initialState);
 
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -53,6 +44,13 @@ export default function RhfZodShadcnPage() {
       message: '',
     },
   });
+
+  // 监听服务端提交结果，如果成功则重置表单
+  useEffect(() => {
+    if (state.success) {
+      form.reset();
+    }
+  }, [state.success, form]);
 
   function onSubmitClient(data: ContactFormData) {
     const formData = new FormData();
@@ -359,9 +357,9 @@ export default function RhfZodShadcnPage() {
             </ul>
           </div>
 
-          <div className="rounded-xl border border-rose-500/20 bg-rose-500/5 p-5">
-            <h3 className="mb-2 text-sm font-semibold text-rose-700">生产就绪</h3>
-            <p className="text-sm leading-relaxed text-rose-700/80">
+          <div className="rounded-xl border border-rose-500/20 dark:border-rose-500/30 bg-rose-500/5 dark:bg-rose-500/10 p-5">
+            <h3 className="mb-2 text-sm font-semibold text-rose-700 dark:text-rose-400">生产就绪</h3>
+            <p className="text-sm leading-relaxed text-rose-700/80 dark:text-rose-400/80">
               这套组合是目前 Next.js 生态中表单处理的最佳实践，
               兼具开发效率、类型安全、用户体验和可维护性。
             </p>

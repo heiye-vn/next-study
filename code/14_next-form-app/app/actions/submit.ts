@@ -1,5 +1,7 @@
 'use server'; // 告诉 Next.js：这个文件导出的是 Server Action
 
+import { contactFormSchema } from '@/lib/schemas';
+
 export interface FormState {
   success: boolean;
   message: string;
@@ -11,44 +13,26 @@ export async function submitForm(_prevState: FormState, formData: FormData): Pro
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  const subject = formData.get('subject') as string;
-  const message = formData.get('message') as string;
+  const rawData = {
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    subject: formData.get('subject') as string,
+    message: formData.get('message') as string,
+  };
 
-  // Server-side validation
-  const errors: Record<string, string[]> = {};
+  // 使用共享的 Zod Schema 进行服务端二次校验
+  const result = contactFormSchema.safeParse(rawData);
 
-  if (!name || name.trim().length < 2) {
-    errors.name = errors.name || [];
-    errors.name.push('姓名至少需要 2 个字符');
-  }
-
-  if (!email) {
-    errors.email = errors.email || [];
-    errors.email.push('请输入邮箱地址');
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.email = errors.email || [];
-    errors.email.push('请输入有效的邮箱地址');
-  }
-
-  if (!subject) {
-    errors.subject = errors.subject || [];
-    errors.subject.push('请选择主题');
-  }
-
-  if (!message || message.trim().length < 10) {
-    errors.message = errors.message || [];
-    errors.message.push('留言至少需要 10 个字符');
-  }
-
-  if (Object.keys(errors).length > 0) {
+  if (!result.success) {
+    const fieldErrors = result.error.flatten().fieldErrors;
     return {
       success: false,
       message: '请检查表单中的错误',
-      errors,
+      errors: fieldErrors as Record<string, string[]>,
     };
   }
+
+  const { name, email, subject, message } = result.data;
 
   // Simulate successful submission
   return {

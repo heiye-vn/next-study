@@ -77,7 +77,7 @@ export default function Home() {
         </div>
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
           表单模式
-          <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-primary to-violet-500 bg-clip-text text-transparent">
             {" "}渐进式演示
           </span>
         </h1>
@@ -97,12 +97,12 @@ export default function Home() {
           >
             {/* Gradient accent */}
             <div
-              className={`absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r ${mode.color} opacity-0 transition-opacity group-hover:opacity-100`}
+              className={`absolute inset-x-0 top-0 h-px rounded-t-2xl bg-linear-to-r ${mode.color} opacity-0 transition-opacity group-hover:opacity-100`}
             />
 
             <div className="mb-4 flex items-center justify-between">
               <div
-                className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${mode.color} text-white shadow-sm`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${mode.color} text-white shadow-sm`}
               >
                 <mode.icon className="h-5 w-5" />
               </div>
@@ -146,7 +146,7 @@ export default function Home() {
           <span className="rounded bg-secondary px-2 py-1 font-mono">
             简单
           </span>
-          <div className="h-px w-24 bg-gradient-to-r from-amber-400 via-emerald-400 to-rose-400" />
+          <div className="h-px w-24 bg-linear-to-r from-amber-400 via-emerald-400 to-rose-400" />
           <span className="rounded bg-secondary px-2 py-1 font-mono">
             完整
           </span>

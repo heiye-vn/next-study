@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,27 +12,8 @@ import {
   Code2,
   Server,
 } from "lucide-react";
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 import { submitForm, type FormState } from "../actions/submit";
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(1, "请输入姓名")
-    .min(2, "姓名至少需要 2 个字符"),
-  email: z
-    .string()
-    .min(1, "请输入邮箱")
-    .email("请输入有效的邮箱地址"),
-  subject: z
-    .string()
-    .min(1, "请选择主题"),
-  message: z
-    .string()
-    .min(1, "请输入留言内容")
-    .min(10, "留言至少需要 10 个字符"),
-});
-
-type ContactFormData = z.infer<typeof formSchema>;
 
 const initialState: FormState = {
   success: false,
@@ -49,8 +29,15 @@ export default function RhfZodServerPage() {
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(contactFormSchema),
   });
+
+  // 监听服务端返回状态，提交成功后重置表单
+  useEffect(() => {
+    if (state.success) {
+      reset();
+    }
+  }, [state.success, reset]);
 
   function onSubmitClient(data: ContactFormData) {
     // Convert form data to FormData for server action
@@ -97,7 +84,7 @@ export default function RhfZodServerPage() {
       {/* Page Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 text-white text-sm font-bold">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-violet-500 to-purple-600 text-white text-sm font-bold">
             04
           </div>
           <div>
@@ -118,7 +105,7 @@ export default function RhfZodServerPage() {
             {/* Server Response */}
             {state.success && (
               <div className="mb-5 flex items-start gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-emerald-700">
                     {state.message}
@@ -290,7 +277,7 @@ export default function RhfZodServerPage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-linear-to-r from-violet-500 to-purple-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isPending ? (
                   <>
@@ -337,7 +324,7 @@ export async function submitForm(
             </div>
             <ul className="space-y-2.5 text-sm text-muted-foreground">
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
                 <span>
                   <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">
                     useActionState
@@ -346,11 +333,11 @@ export async function submitForm(
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
                 <span>客户端 Zod 验证 + 服务端双重校验</span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
                 <span>
                   表单数据通过{" "}
                   <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">
@@ -360,7 +347,7 @@ export async function submitForm(
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-violet-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
                 <span>服务端返回的错误信息会显示在对应字段下方</span>
               </li>
             </ul>

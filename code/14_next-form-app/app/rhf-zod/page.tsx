@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,26 +13,6 @@ import {
   Code2,
   ShieldCheck,
 } from "lucide-react";
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(1, "请输入姓名")
-    .min(2, "姓名至少需要 2 个字符"),
-  email: z
-    .string()
-    .min(1, "请输入邮箱")
-    .email("请输入有效的邮箱地址"),
-  subject: z
-    .string()
-    .min(1, "请选择主题"),
-  message: z
-    .string()
-    .min(1, "请输入留言内容")
-    .min(10, "留言至少需要 10 个字符"),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 export default function RhfZodFormPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -43,11 +23,11 @@ export default function RhfZodFormPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
   });
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: ContactFormData) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setSubmitted(true);
     setSubmitResult(JSON.stringify(data, null, 2));
@@ -89,7 +69,7 @@ export default function RhfZodFormPage() {
       {/* Page Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-sm font-bold">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600 text-white text-sm font-bold">
             03
           </div>
           <div>
@@ -241,7 +221,7 @@ export default function RhfZodFormPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-linear-to-r from-emerald-500 to-teal-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -287,7 +267,7 @@ export default function RhfZodFormPage() {
             </div>
             <ul className="space-y-2.5 text-sm text-muted-foreground">
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                 <span>
                   用{" "}
                   <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">
@@ -297,7 +277,7 @@ export default function RhfZodFormPage() {
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                 <span>
                   <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">
                     z.infer
@@ -306,21 +286,21 @@ export default function RhfZodFormPage() {
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                 <span>验证规则集中定义，便于复用和维护</span>
               </li>
               <li className="flex gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                 <span>支持复杂验证：refine、transform、交叉类型等</span>
               </li>
             </ul>
           </div>
 
-          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
-            <h3 className="text-sm font-semibold mb-2 text-emerald-700">
+          <div className="rounded-xl border border-emerald-500/20 dark:border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-500/10 p-5">
+            <h3 className="text-sm font-semibold mb-2 text-emerald-700 dark:text-emerald-400">
               当前局限
             </h3>
-            <p className="text-sm text-emerald-700/80 leading-relaxed">
+            <p className="text-sm text-emerald-700/80 dark:text-emerald-400/80 leading-relaxed">
               表单仍然只在客户端提交。在生产环境中，还需要服务端验证来确保数据安全。
               下一节将引入 Server Actions 实现完整的全栈表单处理。
             </p>

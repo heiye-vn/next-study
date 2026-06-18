@@ -312,9 +312,9 @@ export default function RhfFormPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-5">
-            <h3 className="mb-2 text-sm font-semibold text-blue-700">局限性</h3>
-            <p className="text-sm leading-relaxed text-blue-700/80">
+          <div className="rounded-xl border border-blue-500/20 dark:border-blue-500/30 bg-blue-500/5 dark:bg-blue-500/10 p-5">
+            <h3 className="mb-2 text-sm font-semibold text-blue-700 dark:text-blue-400">局限性</h3>
+            <p className="text-sm leading-relaxed text-blue-700/80 dark:text-blue-400/80">
               验证规则以内联方式定义，缺乏可复用性和类型安全。
               复杂验证（如跨字段验证）仍需要手动处理。 下一节将展示如何用 Zod 解决这些问题。
             </p>
